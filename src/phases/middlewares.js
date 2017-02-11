@@ -14,6 +14,9 @@ module.exports = function phase(done) {
     }
   }));
 
+  // Proxy support.
+  this.enable('trust proxy');
+
   // Security headers.
   this.use(helmet.hsts({ maxAge: 31536000000 }));
   this.use(helmet.xssFilter());
