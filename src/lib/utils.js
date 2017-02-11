@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const logger = require('./logger');
 
 /*
  * Generate an XSRF token which will be validated by the authorization server.
@@ -15,6 +16,9 @@ module.exports.generateXsrfToken = (req) => {
     req.headers['user-agent'],
     req.headers.referer
   ];
+
+  logger.info(xsrfToken, 'Creating XSRF token.');
+
   return crypto.createHash('sha256')
     .update(xsrfToken.join('|'))
     .digest('base64');
